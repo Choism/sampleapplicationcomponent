@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class OtherActivity extends AppCompatActivity {
+    public static final String EXTRA_MY_DATA = "mydata";
+
     TextView messageView;
     EditText inputResultView;
 
@@ -24,10 +26,18 @@ public class OtherActivity extends AppCompatActivity {
         messageView = (TextView)findViewById(R.id.text_message);
         inputResultView = (EditText)findViewById(R.id.edit_input_result);
 
+
+        //Serializable , Parcelable 사용 장소
         Intent intent = getIntent();
+        MyData data = (MyData)intent.getParcelableExtra(EXTRA_MY_DATA);
+
+
+
         String text = intent.getStringExtra(EXTRA_KEYWORD);
-        int age = intent.getIntExtra(EXTRA_AGE, 0);
-        messageView.setText(text + ", age : " + age);
+//        int age = intent.getIntExtra(EXTRA_AGE, 0);
+//        messageView.setText(text + ", age : " + age);
+
+
         Button btn = (Button)findViewById(R.id.btn_finish);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

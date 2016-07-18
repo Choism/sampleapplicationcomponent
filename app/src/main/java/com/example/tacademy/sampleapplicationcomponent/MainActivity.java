@@ -27,8 +27,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OtherActivity.class);
                 String input = inputView.getText().toString();
-                intent.putExtra(OtherActivity.EXTRA_KEYWORD, input);
-                intent.putExtra(OtherActivity.EXTRA_AGE, 42);
+
+              //Serializable , Parcelable 사용 장소
+                MyData data = new MyData();
+                data.keyword = input;
+                data.age = 42;
+
+
+
+//                intent.putExtra(OtherActivity.EXTRA_KEYWORD, input); //input = keyword
+//                intent.putExtra(OtherActivity.EXTRA_AGE, 42);
 //                startActivity(intent);
                 startActivityForResult(intent, RC_OTHER);
             }
