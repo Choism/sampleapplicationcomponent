@@ -9,10 +9,15 @@ import java.io.Serializable;
  * Created by Tacademy on 2016-07-18.
  */
 /*
+
 public class MyData implements Serializable { //Serializable
 public String keyword;
     public int age;
-}*/
+    public
+}
+*/
+
+
 
 public class MyData implements Parcelable { //Parcelable
 public String keyword;
@@ -54,4 +59,3 @@ public MyData[] newArray(int size) {
         }
     };
 }
-

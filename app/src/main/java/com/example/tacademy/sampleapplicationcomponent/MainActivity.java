@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
     EditText inputView;
     TextView resultView;
     private static final int RC_OTHER = 0;
@@ -27,25 +28,43 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OtherActivity.class);
                 String input = inputView.getText().toString();
-
-              //Serializable , Parcelable 사용 장소
                 MyData data = new MyData();
                 data.keyword = input;
                 data.age = 42;
 
-
-
-//                intent.putExtra(OtherActivity.EXTRA_KEYWORD, input); //input = keyword
+                intent.putExtra(OtherActivity.EXTRA_MY_DATA, data);
+//                intent.putExtra(OtherActivity.EXTRA_KEYWORD, input);
 //                intent.putExtra(OtherActivity.EXTRA_AGE, 42);
+
 //                startActivity(intent);
                 startActivityForResult(intent, RC_OTHER);
+            }
+        });
+
+
+        btn = (Button)findViewById(R.id.btn_start);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MyService.class);
+                intent.putExtra("count", 100);
+                startService(intent);
+            }
+        });
+
+        btn = (Button)findViewById(R.id.btn_stop);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MyService.class);
+                stopService(intent);
             }
         });
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  //서브에서 메인 setResult으로 값을 보낼때 값 판단하는곳
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_OTHER) {
             if (resultCode == Activity.RESULT_OK) {
